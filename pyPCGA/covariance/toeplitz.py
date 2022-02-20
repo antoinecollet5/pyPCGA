@@ -3,7 +3,12 @@
 '''
 import numpy as np
 from pyPCGA.covariance.dense import GenerateDenseMatrix
-
+try:
+    from IPython.core.debugger import Tracer
+    debug_here = Tracer()
+except ImportError:
+    from IPython.core.debugger import set_trace
+    set_trace()
 
 __all__ = ['CreateRow', 'ToeplitzProduct', 'Realizations']
 
@@ -153,18 +158,7 @@ def Realizations(row, N):
     return r1, r2, eps
 
 if __name__ == '__main__':
-
-    import IPython
-
-    if IPython.__version__ <= "5.1":
-        from IPython.core.debugger import Tracer
-
-        debug_here = Tracer()
-    else:
-        from IPython.core.debugger import set_trace
-
-        set_trace()
-    
+  
     def kernel(R):
         return 0.01 * np.exp(-R)
 
